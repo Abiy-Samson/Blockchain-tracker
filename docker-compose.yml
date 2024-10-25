@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=your_database_password
+      - DB_DATABASE=blockchain_prices
+      - MORALIS_API_KEY=your_moralis_api_key
+      - EMAIL=your_email@gmail.com
+      - EMAIL_PASSWORD=your_email_password
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: your_database_password
+      POSTGRES_DB: blockchain_prices
+    ports:
+      - '5432:5432'
